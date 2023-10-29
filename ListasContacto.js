@@ -58,3 +58,28 @@ function recorrerArr(arr) {
 }
 
 recorrerArr(listaContacto);
+
+function actualizarContacto(id, nuevoInfo) {
+  const contacto = listaContacto.find(contacto => contacto.id === id);
+
+  if (contacto) {
+    listaContacto = listaContacto.map(c => {
+      if (c.id === id) {
+        return {
+          ...c,
+          ...nuevoInfo
+        };
+      }
+      return c;
+    });
+
+    console.log('Contacto actualizado:', listaContacto.find(c => c.id === id));
+  } else {
+    console.log('Contacto no encontrado');
+  }
+}
+
+actualizarContacto(1, {
+  telefono: "555555555",
+  ciudad: "Nueva Ciudad"
+});
