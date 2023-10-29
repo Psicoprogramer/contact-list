@@ -1,40 +1,60 @@
 let listaContacto = [];
 
-function addContacto(name = "Sin nombre") {
-  listaContacto.push(name);
-  return console.log(
-    "Contacto " + listaContacto[listaContacto.length-1]
-  );
+function addContacto(contacto) {
+  const nuevoContacto = {
+    id: listaContacto.length + 1,
+    nombres: contacto.nombres || "Sin nombre",
+    apellidos: contacto.apellidos || "Sin apellidos",
+    telefono: contacto.telefono || "Sin teléfono",
+    ubicaciones: contacto.ubicaciones || [],
+    ciudad: contacto.ciudad || "Sin ciudad",
+    direccion: contacto.direccion || "Sin dirección"
+  };
+
+  listaContacto.push(nuevoContacto);
+
+  return console.log("Contacto añadido:", nuevoContacto);
 }
 
-console.log(addContacto("Brayan Cabrera"));
-console.log(addContacto("Nicolth sanches"));
+console.log(addContacto({
+  nombres: "Brayan",
+  apellidos: "Cabrera",
+  telefono: "123456789",
+  ubicaciones: ["Casa"],
+  ciudad: "Ciudad",
+  direccion: "123 Calle Principal"
+}));
 
-console.log(addContacto());
+console.log(addContacto({
+  nombres: "Nicolth",
+  apellidos: "Sanches",
+  telefono: "987654321",
+  ubicaciones: ["Oficina"],
+  ciudad: "Otra Ciudad",
+  direccion: "456 Calle Secundaria"
+}));
 
-function deleteContacto(name){
-   
-    const buscarName = listaContacto.indexOf(name);
+console.log(addContacto()); // Sin nombre
 
-    if(buscarName !== -1)
-    {
-       console.log(' Se elimino el contacto ' + listaContacto[buscarName]); 
-       listaContacto.splice(buscarName,1);
+function deleteContacto(id) {
+  const buscarContacto = listaContacto.find(contacto => contacto.id === id);
 
-    }
-    else {
-        return console.log('Nombre no encontrado ')
-    }
-
+  if (buscarContacto) {
+    console.log('Se eliminó el contacto:', buscarContacto);
+    listaContacto = listaContacto.filter(contacto => contacto.id !== id);
+  } else {
+    console.log('Contacto no encontrado');
+  }
 }
+
 console.log(listaContacto);
-deleteContacto('Brayan Cabrera');
 
+deleteContacto(1);
 
 function recorrerArr(arr) {
-   return arr.forEach(element => {
-        console.log(element);
-    });
-    
+  return arr.forEach(element => {
+    console.log(element);
+  });
 }
+
 recorrerArr(listaContacto);
